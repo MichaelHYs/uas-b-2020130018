@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateOrderItemsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migration.
      *
      * @return void
      */
