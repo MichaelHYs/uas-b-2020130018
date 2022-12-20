@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-primary">
         <a class="navbar-brand" href="/">
             <i class="fa fa-film fa-fw" aria-hidden="true"></i>
-            <span class="menu-collapsed">itemDB</span>
+            <span class="menu-collapsed">ItemDB</span>
         </a>
     </nav>
     {{-- Top Navbar END --}}
@@ -35,7 +35,7 @@
                 <a href="{{ route('items.index') }}" class="bg-dark list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-film fa-fw mr-3"></span>
-                        <span class="menu-collapsed">items</span>
+                        <span class="menu-collapsed">Items</span>
                     </div>
                 </a>
             </ul>

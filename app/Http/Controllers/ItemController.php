@@ -72,6 +72,7 @@ class ItemController extends Controller
     public function edit(Item $item)
     {
         //
+        return view('items.edit',compact('item'));
     }
 
     /**
@@ -84,6 +85,16 @@ class ItemController extends Controller
     public function update(Request $request, Item $item)
     {
         //
+        $rules = [
+            'id' => 'required|min:16|max:16',
+            'nama' => 'required',
+            'harga' => 'required|min:1',
+            'stok' => 'required|min:1|max:9999'
+        ];
+        $validated = $request->validate($rules);
+        $item->update($validated);
+        $request->session()->flash('success',"DB memperbarui data Item {$validated['nama']}.");
+        return redirect()->route('items.index');
     }
 
     /**
@@ -95,5 +106,7 @@ class ItemController extends Controller
     public function destroy(Item $item)
     {
         //
+        $item->delete();
+        return redirect()->route('items.index')->with('success',"Data Item  {$item['judul']} berhasil dihapus");
     }
 }

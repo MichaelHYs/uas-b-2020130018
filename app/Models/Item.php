@@ -14,6 +14,6 @@ class Item extends Model
     }
     protected $guarded = [];
     public $incrementing = false;
-    protected $primaryKey = 'item_id';
+    protected $primaryKey = 'id';
     protected $keyType = 'char';
 }
