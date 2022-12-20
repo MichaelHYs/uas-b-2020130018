@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+    public function items(){
+        return $this->hasMany('App\Models\items');
+    }
+    protected $guarded = [];
 }

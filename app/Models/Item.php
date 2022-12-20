@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
+    public function orders()
+    {
+        return $this->hasMany('App\Models\orders');
+    }
+    protected $guarded = [];
+    public $incrementing = false;
+    protected $primaryKey = 'item_id';
+    protected $keyType = 'char';
 }

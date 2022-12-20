@@ -15,6 +15,8 @@ class ItemController extends Controller
     public function index()
     {
         //
+        $items = Item::all();
+        return view('items.index',compact('items'));
     }
 
     /**
@@ -25,6 +27,7 @@ class ItemController extends Controller
     public function create()
     {
         //
+        return view('items.create');
     }
 
     /**
@@ -36,6 +39,16 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         //
+        $rules = [
+            'id' => 'required|min:16|max:16',
+            'nama' => 'required',
+            'harga' => 'required|min:1',
+            'stok' => 'required|min:1|max:9999'
+        ];
+        $validated=$request->validate($rules);
+        Item::create($validated);
+        $request->session()->flash('success',"Item baru dengan nama {$validated['nama']} sudah disimpan!");
+        return redirect()->route('items.index');
     }
 
     /**
@@ -47,6 +60,7 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         //
+        return view('items.show',compact('item'));
     }
 
     /**
