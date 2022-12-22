@@ -44,6 +44,12 @@
                         <span class="menu-collapsed">Items</span>
                     </div>
                 </a>
+                <a href="{{ route('orders.index') }}" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-film fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Orders</span>
+                    </div>
+                </a>
             </ul>
             {{-- Menu List END --}}
         </div>
