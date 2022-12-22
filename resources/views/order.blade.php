@@ -46,12 +46,13 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->nama }}</td>
-                                        <td colspan="2" id="stok">{{ $item->stok }}</td>
+                                        <td>{{ $item->stok }}</td>
                                         <td colspan="2" id="price">{{ $item->harga }}</td>
                                         <td colspan="2">
                                             <input type="hidden" name="id{{ $loop->iteration }}"
                                                 id="id{{ $loop->iteration }}" value="{{ $item->id }}">
-                                            <input type="number" class="form-control @error('quantity') is-invalid @enderror"
+                                            <input type="number"
+                                                class="form-control @error('quantity') is-invalid @enderror"
                                                 name="quantity{{ $loop->iteration }}" id="quantity"
                                                 value="{{ old('quantity') }}" min="0">
                                         </td>
@@ -102,14 +103,20 @@
 
         <button class="btn btn-primary btn-lg btn-block" type="submit">Add</button>
     </form>
+    <hr>
+    <button class="btn btn-success btn-lg btn-block" onclick="myFunction()">Hitung Harga</button>
     <script>
         function myFunction() {
+            console.log("aaaaaaa");
             let total = 0;
             let price = 0;
             const quantityList = document.querySelectorAll("#quantity");
             const priceList = document.querySelectorAll("#price");
-            const stokList = document.querySelectorAll("#stok");
-            total += (+quantityList[i].value) * (+priceList[i].innerHTML);
+            let quantityCount = quantityList.length;
+            console.log(quantityList);
+            for (var i = 0; i < quantityCount; i++) {
+                total += (+quantityList[i].value) * (+priceList[i].innerHTML);
+            }
             document.getElementById("total").innerHTML = Math.round(total * 100) / 100;
             total = Math.round((total * 1.11) * 100) / 100;
             document.getElementById("ntotal").innerHTML = total;

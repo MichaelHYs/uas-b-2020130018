@@ -13,7 +13,7 @@
 
 <body>
     {{-- Top Navbar --}}
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-md navbar-dark bg-success">
         <a class="navbar-brand" href="/">
             <i class="fa fa-film fa-fw" aria-hidden="true"></i>
             <span class="menu-collapsed">ItemDB</span>
@@ -28,7 +28,7 @@
                 {{-- Separator with title --}}
                 <li
                     class="list-group-item sidebar-separator-title
- text-muted d-flex align-items-center menu-collapsed">
+ text-white d-flex align-items-center menu-collapsed bg-danger">
                     <small>MAIN MENU</small>
                 </li>
                 {{-- Separator END --}}
@@ -57,6 +57,13 @@
         {{-- Content --}}
         <div class="col p-4">
             @yield('content')
+            <footer class="bg-dark py-4 text-white mt-4">
+                <div class="container text-center">
+                    <small class="text-center">
+                        Made by Michael Hansel Yapsie | NPM : 2020130018 | Copyright © {{ date('Y') }} STMIK LIKMI
+                    </small>
+                </div>
+            </footer>
         </div>
         {{-- Content ENDss --}}
     </div>

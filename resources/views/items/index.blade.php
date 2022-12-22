@@ -21,7 +21,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Items List</h2>
+                        <h2><b>Item List</b></h2>
                     </div>
                     <div class="col-sm-6">
                         <a href="{{ route('items.create') }}" class="btn btn-success">

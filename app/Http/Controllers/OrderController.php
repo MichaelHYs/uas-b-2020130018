@@ -55,16 +55,23 @@ class OrderController extends Controller
             $itemNow = $itemStoks[$i-1]->stok-$request['quantity'.$i];
             $itemId = $request['id'.$i];
             if($request['quantity'.$i]>0){
-                DB::table('order_items')->insert([
-                    'order_id' => $orderId,
-                    'item_id' => $request['id'.$i],
-                    'quantity' => $request['quantity'.$i],
-                ]);
-                DB::update('update items SET stok =  ? where id = ?', [$itemNow,$itemId]);
+                $x = $request['quantity'.$i];
+                $y = (int)$x;
+                if($y<=$itemStoks[$i-1]->stok){
+                    DB::table('order_items')->insert([
+                        'order_id' => $orderId,
+                        'item_id' => $request['id'.$i],
+                        'quantity' => $request['quantity'.$i],
+                    ]);
+                    DB::update('update items SET stok =  ? where id = ?', [$itemNow,$itemId]);
+                }else{
+                    $request->session()->flash('success',"ERRORR : STOK lebih SEDIKIT dari ORDER !");
+                    return redirect(route('orders.index'));
+                }
             }
         }
-        $request->session()->flash('success',"Successfully added Order Number {$orderId}!");
-        return redirect(route('main.index'));
+        // $request->session()->flash('success',"Successfully added Order Number {$orderId}!");
+        // return redirect(route('main.index'));
         // dump($itemStoks[$i-1]->stok-$request['quantity'.$i]);
         // dump($request);
     }
@@ -113,5 +120,7 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+        $order->delete();
+        return redirect()->route('orders.index')->with('success',"Data order  {$order['judul']} berhasil dihapus");
     }
 }

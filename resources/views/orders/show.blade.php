@@ -9,7 +9,7 @@
             <div class="col-md-4">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <form action="{{ route('order.destroy', $order->id) }}" method="POST">
+                        <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
                             <button type="submit" class="btn btn-danger ml-3">Delete</button>
                             @method('DELETE')
                             @csrf

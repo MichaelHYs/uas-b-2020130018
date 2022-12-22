@@ -18,10 +18,10 @@
     @endif
     <div class="table-responsive">
         <div class="table-wrapper">
-            <div class="table-title">
+            <div class="table-title bg-warning">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <h2>Orders List</h2>
+                    <div class="col-sm-6 text-dark">
+                        <h2><b>Orders List</b></h2>
                     </div>
                     <div class="col-sm-6">
                         <a href="{{ route('orders.create') }}" class="btn btn-success">
@@ -37,6 +37,7 @@
                         <th>#</th>
                         <th>id</th>
                         <th>status</th>
+                        <th>delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +50,13 @@
                             @else
                                 <td>Menunggu Pembayaran</td>
                             @endif
+                            <td>
+                                <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
+                                    <button type="submit" class="btn btn-danger ml-3">Delete</button>
+                                    @method('DELETE')
+                                    @csrf
+                                </form>
+                            </td>
                         </tr>
                     @empty
                         <tr>
