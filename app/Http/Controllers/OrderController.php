@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Menu;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -28,6 +28,8 @@ class OrderController extends Controller
     public function create()
     {
         //
+        $items = Item::all();
+        return view('order', compact('items'));
     }
 
     /**
@@ -38,7 +40,33 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $rules = [
+            'status' => 'required|not_in:none'
+        ];
+        $validated = $request->validate($rules);
+        Order::create($validated);
+
+        $itemcount = Item::all()->count();
+        $orderId = Order::all()->last()->id;
+        $itemStoks = DB::select('SELECT stok FROM items');
+        // $i = 1;
+        for($i = 1; $i<=$itemcount; $i++){
+            $itemNow = $itemStoks[$i-1]->stok-$request['quantity'.$i];
+            $itemId = $request['id'.$i];
+            if($request['quantity'.$i]>0){
+                DB::table('order_items')->insert([
+                    'order_id' => $orderId,
+                    'item_id' => $request['id'.$i],
+                    'quantity' => $request['quantity'.$i],
+                ]);
+                DB::update('update items SET stok =  ? where id = ?', [$itemNow,$itemId]);
+            }
+        }
+        $request->session()->flash('success',"Successfully added Order Number {$orderId}!");
+        return redirect(route('main.index'));
+        // dump($itemStoks[$i-1]->stok-$request['quantity'.$i]);
+        // dump($request);
     }
 
     /**

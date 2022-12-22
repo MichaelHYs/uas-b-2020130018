@@ -43,7 +43,7 @@
                     @forelse ($orders as $order)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $order->id }}</td>
+                            <td><a href="{{ route('orders.show', $order->id) }}">{{ $order->id }}</a></td>
                             @if (strcasecmp($order->status, "selesai") == 0)
                                 <td>Selesai</td>
                             @else
